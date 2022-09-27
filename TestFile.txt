@@ -1,0 +1,48 @@
+package Parameters;
+import java.util.*;
+public class ProjectileUnStructured {
+	public static final double ACCELERATION= -9.81;
+	public static void main(String[] args) {
+		 Scanner s=new Scanner(System.in);
+		System.out.println("This programm computes the");
+		System.out.println("trajectory of a projectile given");
+		System.out.println("its initial velocity and its");
+		System.out.println("angle relative to the");
+		System.out.println("horizontal");
+		System.out.println();
+		
+		   System.out.println("velocity (metere/second)?:");
+		   double velocity=s.nextDouble();
+		   System.out.println("angle (degree):");
+		   double angle=Math.toRadians(s.nextDouble());
+		   System.out.println("number of steps to display:");
+		   int step=s.nextInt();
+		   System.out.println();
+		    
+		    double xVelocity= velocity*Math.sin(angle);
+		    double yVelocity= velocity*Math.cos(angle);
+		    double totalTime=-2.0*yVelocity/ACCELERATION;
+//		    System.out.println(totalTime);
+		    double timeIncrement=totalTime/step;
+		    double xIncrement=xVelocity*timeIncrement;
+		     
+		      double x=0;
+		      double y=0;
+		      double t=0;
+		      System.out.println("step\tx(in m)\ty(in m)\ttime(in sec)");
+		      System.out.println("0\t0.0\t0.0\t0.0");
+		      
+		      for(int i=1;i<=step;i++) {
+		    	  x+=xIncrement;
+		    	  t+=timeIncrement;
+		    	  y=yVelocity*t+ 0.5*ACCELERATION*t*t;
+		    	  System.out.println(i+"\t"+ round2(x)+"\t"+round2(y)+"\t"+round2(t));
+		      }
+		    
+s.close();
+	}
+	public static double round2(double n){
+		return Math.round(n*100)/100;
+	}
+
+}
